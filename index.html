@@ -513,6 +513,48 @@ h1, .hero-text h1, .director-title {
     font-weight: 450 !important; /* Un poco más de cuerpo en fondo claro */
     color: #3c4043 !important; /* El tono exacto de Google High-Readability */
 }
+/* ============================================================
+   RECALIBRACIÓN DE COLORIMETRÍA MK - DARK & LIGHT
+   ============================================================ */
+
+:root {
+    /* --- PALETA DARK (Base) --- */
+    --text-main: #ffffff;           /* Títulos puros */
+    --text-dim: rgba(255, 255, 255, 0.7); /* Párrafos elegantes */
+    --accent-color: #00d4ff;        /* Tu cian de marca */
+}
+
+/* --- HACK DE LEGIBILIDAD PARA MODO LIGHT --- */
+[data-theme="light"] {
+    --text-main: #1d1d1f;           /* Negro Apple (Autoridad) */
+    --text-dim: #424245;            /* Gris Google (Lectura fluida) */
+    --accent-color: #0071e3;        /* Azul profundo para contraste */
+}
+
+/* --- APLICACIÓN UNIFORME --- */
+
+/* 1. Títulos: Máximo Contraste */
+h1, h2, h3, .title-text, .director-title {
+    color: var(--text-main) !important;
+    transition: color 0.4s ease-in-out;
+}
+
+/* 2. Párrafos: El Alma de la lectura */
+p, .director-text, .manifesto-content, .service-card p, .glass-list li {
+    color: var(--text-dim) !important;
+    font-weight: 350 !important; /* Un poco más de cuerpo para el Light */
+    line-height: 1.8 !important;
+    transition: color 0.4s ease-in-out;
+}
+
+/* 3. Ajuste de Contraste en Cards (El toque de maestro) */
+.glass-card, .glass-manifesto-box {
+    border: 1px solid rgba(128, 128, 128, 0.15) !important;
+}
+
+[data-theme="light"] .glass-card {
+    background: rgba(0, 0, 0, 0.03) !important; /* Fondo sutil para que el texto resalte */
+}
 </style>
 </head>
     <body data-theme="dark">

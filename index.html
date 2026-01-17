@@ -414,6 +414,58 @@ p,
     background: rgba(0, 0, 0, 0.05) !important;
     border: 1px solid rgba(0, 0, 0, 0.1) !important;
 }
+/* ============================================================
+   PROTOCOLO DE TEXTO MAESTRO: LEGIBILIDAD Y ELEGANCIA
+   ============================================================ */
+
+/* 1. Definición de la "Voz" del Sistema */
+:root {
+    --mk-text-focus: #ffffff;           /* Blanco puro para títulos */
+    --mk-text-read: rgba(255,255,255,0.7); /* Gris seda para lectura larga */
+    --mk-line-height: 1.8;              /* El aire de la elegancia */
+}
+
+[data-theme="light"] {
+    --mk-text-focus: #1d1d1f;           /* El negro profundo de Apple */
+    --mk-text-read: #424245;            /* Gris grafito para no cansar la vista */
+}
+
+/* 2. Títulos: Autoridad y Espacio */
+h1, h2, .director-title, .title-text {
+    color: var(--mk-text-focus) !important;
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 400 !important;
+    letter-spacing: -0.5px !important;
+    line-height: 1.2 !important;
+    transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 3. Párrafos: El Susurro del Director */
+p, .director-text, .manifesto-content, .service-card p, .glass-list li {
+    color: var(--mk-text-read) !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 1rem !important; /* Tamaño exacto para credibilidad */
+    font-weight: 300 !important;
+    line-height: var(--mk-line-height) !important;
+    text-align: center !important; /* Centralizamos la energía */
+    max-width: 750px !important;   /* Evitamos líneas infinitas que cansan */
+    margin-left: auto !important;
+    margin-right: auto !important;
+    transition: color 0.5s ease;
+}
+
+/* 4. El Toque de Arte (Glow Controlado) */
+.glow-text {
+    color: var(--primary) !important;
+    text-shadow: 0 0 15px rgba(0, 212, 255, 0.3) !important;
+    font-weight: 500 !important;
+}
+
+/* 5. Corrección Específica para el Manifiesto y Cards */
+.glass-manifesto-box *, .glass-card * {
+    /* Esto obliga a que todo lo que esté dentro de una caja herede el color correcto */
+    transition: all 0.5s ease;
+}
 </style>
 </head>
     <body data-theme="dark">

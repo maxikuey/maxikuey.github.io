@@ -630,11 +630,9 @@ a.btn-primary,
     </header>
 
     <section class="intro-hero">
-        <div class="logo-final-container">
-    <div class="efecto-reflejo">
-        <img src="logo MAXIKUEY limpio blanco.svg" class="logo-maestro dark-v" alt="MK">
-        <img src="logo MAXIKUEY limpio negro.svg" class="logo-maestro light-v" alt="MK">
-    </div>
+        <div class="logo-final-pureza">
+    <img src="logo MAXIKUEY limpio blanco.svg" class="logo-maestro dark-v" alt="MK">
+    <img src="logo MAXIKUEY limpio negro.svg" class="logo-maestro light-v" alt="MK">
 </div>
         <div style="text-align: center; margin-bottom: 40px;">
             <p style="letter-spacing: 5px; color: var(--accent-gold); font-size: 0.8rem; margin: 0;">MAXIKUEY AGENCY</p>
@@ -1909,65 +1907,33 @@ a.btn-primary,
             from { transform: scale(1); filter: drop-shadow(0 0 2px var(--primary)); }
             to { transform: scale(1.2); filter: drop-shadow(0 0 10px var(--primary)); }
         }
-        /* CONTENEDOR: Lo centra y le da el tamaño de la frase inferior */
-.logo-final-container {
+        /* CONTENEDOR: Centrado perfecto sin interferencias */
+.logo-final-pureza {
     display: flex;
     justify-content: center;
-    margin-bottom: 15px;
-    overflow: hidden; /* Esto es para que el reflejo no se salga del logo */
+    margin: 0 auto 20px auto; /* Centra y da espacio abajo */
+    width: 100%;
 }
 
-.efecto-reflejo {
-    position: relative;
-    display: inline-block;
-}
-
-/* EL LOGO: Estático, limpio y elegante */
+/* EL LOGO: Estático y con el tamaño de "Pulimos el éxito" */
 .logo-maestro {
-    width: 150px; /* Ajusta este número para que mida lo mismo que "Pulimos el éxito" */
+    width: 140px; /* Ajusta este ancho para que calce con tu frase */
     height: auto;
-    display: block;
+    opacity: 1;
+    border: none !important; /* Elimina cualquier borde fantasma */
+    background: none !important; /* Elimina cualquier fondo que haga el "cuadro" */
 }
 
-/* EL REFLEJO (PRISMA): Es una capa de luz que pasa por encima */
-.efecto-reflejo::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%; /* Empieza fuera de la vista */
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(
-        to right, 
-        transparent 0%, 
-        rgba(255, 255, 255, 0.4) 50%, 
-        transparent 100%
-    );
-    transform: skewX(-30deg); /* Inclina la luz para que se vea pro */
-    animation: flash-prismático 6s infinite; /* Pasa cada 6 segundos */
+/* LÓGICA DE VISIBILIDAD (Sin errores de carga) */
+.light-v { display: none; }
+.dark-v { display: none; }
+
+[data-theme="dark"] .dark-v { 
+    display: block !important; 
 }
 
-/* ANIMACIÓN: El viaje de la luz */
-@keyframes flash-prismático {
-    0% { left: -100%; }
-    20% { left: 150%; } /* El destello cruza rápido */
-    100% { left: 150%; } /* Se queda esperando antes de volver a pasar */
-}
-
-/* LÓGICA DE COLORES (DARK/LIGHT) */
-.light-v { display: none !important; }
-[data-theme="dark"] .dark-v { display: block !important; }
-[data-theme="light"] .dark-v { display: none !important; }
-[data-theme="light"] .light-v { display: block !important; }
-
-/* Ajuste del brillo en modo claro para que no sea blanco, sino un gris sutil */
-[data-theme="light"] .efecto-reflejo::after {
-    background: linear-gradient(
-        to right, 
-        transparent 0%, 
-        rgba(0, 0, 0, 0.05) 50%, 
-        transparent 100%
-    );
+[data-theme="light"] .light-v { 
+    display: block !important; 
 }
     </style>
     </head>

@@ -250,7 +250,133 @@ body {
         footer { padding: 80px 10%; text-align: center; border-top: 1px solid #111; color: #555; font-size: 0.8rem; letter-spacing: 2px; }
 
         @media (max-width: 768px) { .manifesto { grid-template-columns: 1fr; } }
-    </style>
+    /* --- RECALIBRACIÓN MAESTRA: AIRE Y ESCALA --- */
+
+/* 1. Reducción Global de la Fuente (Más elegante) */
+html {
+    font-size: 15px; /* Bajamos la base para que todo lo que use 'rem' se encoja proporcionalmente */
+}
+
+/* 2. El Aire de Google: Forzamos el espaciado en cada SECTOR */
+section, .intro-hero, .hero-text, .director-section, .manifesto-2026, .services, .portfolio, .challenges, .essence {
+    padding-top: 120px !important;
+    padding-bottom: 120px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* Centrado absoluto */
+    text-align: center !important;
+}
+
+/* 3. Títulos más Finos (El toque Google) */
+h1, .hero-text h1, .director-title {
+    font-size: clamp(2rem, 5vw, 3.2rem) !important; /* Reducimos el máximo de 5rem a 3.2rem */
+    font-weight: 400 !important;
+    letter-spacing: -1px !important;
+    max-width: 800px;
+    margin: 0 auto !important;
+}
+
+/* 4. Textos con Aire y Tamaño "Light" */
+p, .director-text, .glass-manifesto-box p {
+    font-size: 0.95rem !important; /* Pequeño y profesional */
+    line-height: 1.8 !important;
+    color: var(--google-gray, rgba(255,255,255,0.6)) !important;
+    max-width: 650px !important; /* Evita que las líneas sean muy largas */
+    margin: 20px auto !important;
+    text-align: center !important; /* Quitamos el justify para centralizar la energía */
+}
+
+/* 5. Elementos Visuales Proporcionales */
+.stage {
+    transform: scale(0.8); /* Encogemos el diamante un 20% sin romper su animación */
+    margin: 20px auto !important;
+}
+
+.director-box-pro, .glass-manifesto-box {
+    max-width: 800px !important; /* Estrechamos las cajas para que haya más aire a los lados */
+    padding: 50px !important;
+}
+
+/* 6. Navbar en Sintonía */
+.navbar-cristal {
+    transform: translateX(-50%) scale(0.9); /* Un toque más pequeña */
+}
+/* ============================================================
+   RECALIBRACIÓN DE ESCALA Y AIRE (SINTONÍA GOOGLE)
+   ============================================================ */
+
+/* 1. Reducción de escala base para mayor finura */
+html {
+    font-size: 14px !important;
+}
+
+/* 2. Unificación de aire (Padding) en todos los sectores */
+section, 
+.intro-hero, 
+.hero-text, 
+.director-section, 
+.manifesto-2026, 
+.services, 
+.portfolio, 
+.challenges, 
+.essence {
+    padding: 120px 5% !important; /* Espacio masivo para que el contenido respire */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; 
+    text-align: center !important;
+    box-sizing: border-box !important;
+}
+
+/* 3. Ajuste de títulos a tamaño elegante (Elimina lo grotesco) */
+h1, 
+.hero-text h1, 
+.director-title, 
+.manifesto-2026 h2, 
+.services h2 {
+    font-size: clamp(2rem, 5vw, 3rem) !important; /* Escala máxima reducida */
+    font-weight: 400 !important;
+    letter-spacing: -1px !important;
+    max-width: 800px !important;
+    margin: 0 auto 25px !important;
+    line-height: 1.1 !important;
+}
+
+/* 4. Textos con cuerpo y legibilidad equilibrada */
+p, 
+.director-text, 
+.glass-manifesto-box p,
+.manifesto-content,
+.service-card p {
+    font-size: 1rem !important; 
+    line-height: 1.8 !important;
+    color: var(--google-gray, rgba(255,255,255,0.6)) !important;
+    max-width: 680px !important;
+    margin: 20px auto !important;
+    font-weight: 300 !important;
+    text-align: center !important;
+}
+
+/* 5. Compactación de elementos visuales (Escala de Director) */
+.stage {
+    transform: scale(0.75) !important; /* Reduce el diamante sin romper su lógica */
+    margin: 30px auto !important;
+}
+
+.navbar-cristal {
+    transform: translateX(-50%) scale(0.85) !important; /* Nav compacta y centrada */
+}
+
+/* 6. Cajas de contenido con proporciones quirúrgicas */
+.director-box-pro, 
+.glass-manifesto-box,
+.service-card {
+    max-width: 800px !important;
+    padding: 60px 40px !important;
+    border-radius: 40px !important;
+    margin: 0 auto !important;
+}
+</style>
 </head>
     <body data-theme="dark">
     <div class="floating-nav">

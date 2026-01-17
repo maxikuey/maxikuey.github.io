@@ -630,10 +630,12 @@ a.btn-primary,
     </header>
 
     <section class="intro-hero">
-        <div class="brand-crown">
-    <img src="logo MAXIKUEY limpio blanco.svg" class="crown-svg dark-version" alt="MK Crown White">
-    <img src="logo MAXIKUEY limpio negro.svg" class="crown-svg light-version" alt="MK Crown Black">
-        </div>
+        <div class="logo-final-container">
+    <div class="efecto-reflejo">
+        <img src="logo MAXIKUEY limpio blanco.svg" class="logo-maestro dark-v" alt="MK">
+        <img src="logo MAXIKUEY limpio negro.svg" class="logo-maestro light-v" alt="MK">
+    </div>
+</div>
         <div style="text-align: center; margin-bottom: 40px;">
             <p style="letter-spacing: 5px; color: var(--accent-gold); font-size: 0.8rem; margin: 0;">MAXIKUEY AGENCY</p>
             <h1 style="font-family: 'Playfair Display', serif; font-size: 3rem; margin: 10px 0 0 0; color: white;">Pulimos el éxito.</h1>
@@ -768,7 +770,6 @@ a.btn-primary,
             0% { left: -100%; }
             100% { left: 100%; }
         }
-        
 
         /* Script simple para que el aura siga al mouse (Efecto 2026) */
     </style>
@@ -1054,44 +1055,6 @@ a.btn-primary,
             white-space: nowrap;
             box-shadow: 0 4px 15px rgba(224,192,151,0.5);
         }
-        /* ============================================================
-   LA CORONA DEL DIAMANTE: LOGOS SVG DINÁMICOS
-   ============================================================ */
-
-.brand-crown {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px; /* Espaciado premium */
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.crown-svg {
-    width: 60px; /* Tamaño de autoridad */
-    height: auto;
-    filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.2));
-    animation: floatCrown 5s ease-in-out infinite;
-}
-
-/* Control de visibilidad por tema */
-.light-version { display: none !important; }
-[data-theme="dark"] .dark-version { display: block !important; }
-
-[data-theme="light"] .dark-version { display: none !important; }
-[data-theme="light"] .light-version { 
-    display: block !important;
-    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.1));
-}
-
-/* Animación de flotación "Pulido de Éxito" */
-@keyframes floatCrown {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-}
-
-/* Efecto al pasar el mouse: El Diamante Reacciona */
-.brand-crown:hover {
-    transform: scale(1.15) rotate(3deg);
-}
     </style>
 </section>
 
@@ -1946,6 +1909,66 @@ a.btn-primary,
             from { transform: scale(1); filter: drop-shadow(0 0 2px var(--primary)); }
             to { transform: scale(1.2); filter: drop-shadow(0 0 10px var(--primary)); }
         }
+        /* CONTENEDOR: Lo centra y le da el tamaño de la frase inferior */
+.logo-final-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    overflow: hidden; /* Esto es para que el reflejo no se salga del logo */
+}
+
+.efecto-reflejo {
+    position: relative;
+    display: inline-block;
+}
+
+/* EL LOGO: Estático, limpio y elegante */
+.logo-maestro {
+    width: 150px; /* Ajusta este número para que mida lo mismo que "Pulimos el éxito" */
+    height: auto;
+    display: block;
+}
+
+/* EL REFLEJO (PRISMA): Es una capa de luz que pasa por encima */
+.efecto-reflejo::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%; /* Empieza fuera de la vista */
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.4) 50%, 
+        transparent 100%
+    );
+    transform: skewX(-30deg); /* Inclina la luz para que se vea pro */
+    animation: flash-prismático 6s infinite; /* Pasa cada 6 segundos */
+}
+
+/* ANIMACIÓN: El viaje de la luz */
+@keyframes flash-prismático {
+    0% { left: -100%; }
+    20% { left: 150%; } /* El destello cruza rápido */
+    100% { left: 150%; } /* Se queda esperando antes de volver a pasar */
+}
+
+/* LÓGICA DE COLORES (DARK/LIGHT) */
+.light-v { display: none !important; }
+[data-theme="dark"] .dark-v { display: block !important; }
+[data-theme="light"] .dark-v { display: none !important; }
+[data-theme="light"] .light-v { display: block !important; }
+
+/* Ajuste del brillo en modo claro para que no sea blanco, sino un gris sutil */
+[data-theme="light"] .efecto-reflejo::after {
+    background: linear-gradient(
+        to right, 
+        transparent 0%, 
+        rgba(0, 0, 0, 0.05) 50%, 
+        transparent 100%
+    );
+}
     </style>
     </head>
     <footer style="background: transparent; color: var(--text-main); text-align: center; padding: 40px 0;">

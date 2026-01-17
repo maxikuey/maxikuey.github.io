@@ -555,6 +555,56 @@ p, .director-text, .manifesto-content, .service-card p, .glass-list li {
 [data-theme="light"] .glass-card {
     background: rgba(0, 0, 0, 0.03) !important; /* Fondo sutil para que el texto resalte */
 }
+/* ============================================================
+   RECALIBRACIÓN FINAL: EL SELLO DEL DIRECTOR
+   ============================================================ */
+
+/* 1. DOMINIO DE LOS ENLACES DE CONTACTO (Phone, IG, Mail) */
+#contacto-final a, 
+.contact-item a, 
+.footer-section a {
+    color: var(--text-main) !important; /* Usa el blanco en dark y negro en light */
+    text-decoration: none !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+}
+
+/* 2. EL BOTÓN "INICIAR TALLA" Y "CAMINEMOS JUNTOS" */
+/* He visto que usas .btn-primary, vamos a hacerlo invencible */
+.btn-primary, 
+a.btn-primary, 
+[href="#contacto-final"].btn-primary {
+    background-color: var(--primary) !important;
+    color: #000000 !important; /* Siempre negro sobre cian para máxima lectura */
+    font-weight: 800 !important;
+    padding: 15px 35px !important;
+    border-radius: 5px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+    box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3) !important;
+    border: none !important;
+}
+
+/* 3. REGLAS ESPECÍFICAS PARA EL MODO CLARO (Light Mode) */
+/* Aquí es donde el dragón se perdía. Vamos a forzar el negro puro. */
+[data-theme="light"] #contacto-final a, 
+[data-theme="light"] .contact-item a, 
+[data-theme="light"] .footer-section a,
+[data-theme="light"] #contacto-final p {
+    color: #000000 !important; /* Negro sólido en fondo blanco */
+}
+
+[data-theme="light"] .btn-primary {
+    background-color: #000000 !important; /* Botón negro en modo claro */
+    color: #ffffff !important; /* Texto blanco en botón negro */
+}
+
+/* 4. EFECTO HOVER PARA EL INSTAGRAM Y LINKS */
+#contacto-final a:hover {
+    color: var(--primary) !important;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5) !important;
+    transform: translateY(-2px);
+}
 </style>
 </head>
     <body data-theme="dark">
@@ -580,6 +630,10 @@ p, .director-text, .manifesto-content, .service-card p, .glass-list li {
     </header>
 
     <section class="intro-hero">
+        <div class="brand-crown">
+    <img src="logo MAXIKUEY limpio blanco.svg" class="crown-svg dark-version" alt="MK Crown White">
+    <img src="logo MAXIKUEY limpio negro.svg" class="crown-svg light-version" alt="MK Crown Black">
+        </div>
         <div style="text-align: center; margin-bottom: 40px;">
             <p style="letter-spacing: 5px; color: var(--accent-gold); font-size: 0.8rem; margin: 0;">MAXIKUEY AGENCY</p>
             <h1 style="font-family: 'Playfair Display', serif; font-size: 3rem; margin: 10px 0 0 0; color: white;">Pulimos el éxito.</h1>
@@ -714,6 +768,7 @@ p, .director-text, .manifesto-content, .service-card p, .glass-list li {
             0% { left: -100%; }
             100% { left: 100%; }
         }
+        
 
         /* Script simple para que el aura siga al mouse (Efecto 2026) */
     </style>
@@ -999,6 +1054,44 @@ p, .director-text, .manifesto-content, .service-card p, .glass-list li {
             white-space: nowrap;
             box-shadow: 0 4px 15px rgba(224,192,151,0.5);
         }
+        /* ============================================================
+   LA CORONA DEL DIAMANTE: LOGOS SVG DINÁMICOS
+   ============================================================ */
+
+.brand-crown {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px; /* Espaciado premium */
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.crown-svg {
+    width: 60px; /* Tamaño de autoridad */
+    height: auto;
+    filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.2));
+    animation: floatCrown 5s ease-in-out infinite;
+}
+
+/* Control de visibilidad por tema */
+.light-version { display: none !important; }
+[data-theme="dark"] .dark-version { display: block !important; }
+
+[data-theme="light"] .dark-version { display: none !important; }
+[data-theme="light"] .light-version { 
+    display: block !important;
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.1));
+}
+
+/* Animación de flotación "Pulido de Éxito" */
+@keyframes floatCrown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* Efecto al pasar el mouse: El Diamante Reacciona */
+.brand-crown:hover {
+    transform: scale(1.15) rotate(3deg);
+}
     </style>
 </section>
 

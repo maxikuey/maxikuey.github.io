@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { background: #050505; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; margin: 0; }
+        
+        .stage { position: relative; width: 400px; height: 400px; }
+
+        /* Estilo base para cada fragmento */
+        .piece {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: all 1.5s cubic-bezier(0.7, 0, 0.3, 1);
+            opacity: 0.6;
+        }
+
+        /* Piezas en estado "PIEDRA" (Desordenadas) */
+        .p1 { background: #00d4ff; clip-path: polygon(10% 10%, 40% 20%, 30% 50%); transform: translate(-50px, -30px) rotate(15deg); }
+        .p2 { background: #7000ff; clip-path: polygon(60% 20%, 90% 40%, 70% 60%); transform: translate(40px, 20px) rotate(-10deg); }
+        .p3 { background: #0055ff; clip-path: polygon(40% 70%, 80% 80%, 20% 90%); transform: translate(-10px, 50px) rotate(5deg); }
+
+        /* Estado "DIAMANTE" (Ensambladas) al pasar el mouse */
+        .stage:hover .p1 { clip-path: polygon(50% 0%, 100% 50%, 50% 50%); transform: translate(0,0) rotate(0deg); opacity: 1; }
+        .stage:hover .p2 { clip-path: polygon(100% 50%, 50% 100%, 50% 50%); transform: translate(0,0) rotate(0deg); opacity: 1; }
+        .stage:hover .p3 { clip-path: polygon(50% 100%, 0% 50%, 50% 50%); transform: translate(0,0) rotate(0deg); opacity: 1; }
+        
+        .stage:hover .p4 { clip-path: polygon(0% 50%, 50% 0%, 50% 50%); transform: translate(0,0) rotate(0deg); opacity: 1; }
+        .p4 { position: absolute; width: 100%; height: 100%; background: #ffffff; clip-path: polygon(20% 20%, 30% 25%, 25% 35%); transform: translate(60px, -60px); opacity: 0; transition: all 1.5s; }
+        .stage:hover .p4 { opacity: 0.8; }
+    </style>
+</head>
+<body>
+    <div class="stage">
+        <div class="piece p1"></div>
+        <div class="piece p2"></div>
+        <div class="piece p3"></div>
+        <div class="piece p4"></div>
+    </div>
+</body>
+</html>

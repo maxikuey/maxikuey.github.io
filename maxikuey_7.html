@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maxikuey Agency | Emiro Atencio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+       :root {
+    --primary: #00d4ff; 
+    --secondary: #7000ff;
+    --accent-gold: #e0c097;
+    /* Estas son las variables mágicas que van a cambiar */
+    --bg-body: #050505;
+    --text-main: #ffffff;
+    --glass-card: rgba(255, 255, 255, 0.03);
+    /* ... tus otras variables ... */
+    --gradient-start: #0a0a0a; /* Centro oscuro */
+    --gradient-end: #050505;   /* Borde oscuro */
+}
+
+/* Aquí le decimos qué colores usar cuando la página esté en modo CLARO */
+[data-theme="light"] {
+    --bg-body: #f5f5f7;
+    --text-main: #1d1d1f;
+    --glass-card: rgba(0, 0, 0, 0.05);
+    /* ... tus otras variables ... */
+    --gradient-start: #ffffff; /* Centro blanco puro */
+    --gradient-end: #e5e5e7;   /* Borde grisáceo suave (estilo Apple) */
+}
+/* --- BARRA FLOTANTE FUTURISTA (CRISTAL PLUS) --- */
+.floating-nav {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.03); /* Cristal base */
+    backdrop-filter: blur(20px); /* El efecto Enya / Apple */
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 100px; /* Forma de cápsula */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* El brillo (glow) que pediste */
+.floating-nav::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 100px;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    z-index: -1;
+    opacity: 0.2;
+    filter: blur(10px);
+}
+
+.nav-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    background: transparent;
+    color: white;
+}
+
+.nav-btn:hover {
+    transform: scale(1.1) translateY(-3px);
+    color: var(--primary);
+}
+
+.nav-divider {
+    width: 1px;
+    height: 25px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* ADAPTACIÓN AL MODO LUNA (CLARO) */
+[data-theme="light"] .floating-nav {
+    background: rgba(255, 255, 255, 0.7); /* Cristal blanco */
+    border-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .nav-btn {
+    color: #1d1d1f;
+}
+
+[data-theme="light"] .nav-divider {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* Esto obliga al cuerpo de la página a usar esas variables */
+body {
+    background-color: var(--bg-body) !important;
+    color: var(--text-main) !important;
+    margin: 0; font-family: 'Montserrat', sans-serif;
+    line-height: 1.8; overflow-x: hidden; scroll-behavior: smooth;
+    transition: all 0.6s ease;
+}
+
+        body {
+            margin: 0; font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark); color: white;
+            line-height: 1.8; overflow-x: hidden; scroll-behavior: smooth;
+        }
+
+        /* --- BG DINÁMICO --- */
+        .bg-vibe {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 10% 10%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 90%, rgba(112, 0, 255, 0.08) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        header {
+            padding: 20px 5%; display: flex; justify-content: space-between; align-items: center;
+            position: fixed; width: 90%; top: 0; z-index: 1000;
+            background: rgba(5, 5, 5, 0.9); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo { font-weight: 700; letter-spacing: 5px; color: var(--primary); text-transform: uppercase; }
+
+        /* --- SECCIÓN INTRO: ANIMACIÓN DIAMANTE --- */
+        .intro-hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            position: relative;
+        }
+        
+        .stage { position: relative; width: 350px; height: 350px; cursor: pointer; }
+
+        .piece {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: all 1.5s cubic-bezier(0.7, 0, 0.3, 1);
+            opacity: 0.6;
+        }
+
+        /* Estado PIEDRA */
+        .p1 { background: #00d4ff; clip-path: polygon(10% 10%, 40% 20%, 30% 50%); transform: translate(-50px, -30px) rotate(15deg); }
+        .p2 { background: #7000ff; clip-path: polygon(60% 20%, 90% 40%, 70% 60%); transform: translate(40px, 20px) rotate(-10deg); }
+        .p3 { background: #0055ff; clip-path: polygon(40% 70%, 80% 80%, 20% 90%); transform: translate(-10px, 50px) rotate(5deg); }
+        .p4 { position: absolute; width: 100%; height: 100%; background: #ffffff; clip-path: polygon(20% 20%, 30% 25%, 25% 35%); transform: translate(60px, -60px); opacity: 0; transition: all 1.5s; }
+
+        /* Estado DIAMANTE (Hover) */
+        .stage:hover .p1 { clip-path: polygon(50% 0%, 100% 50%, 50% 50%); transform: translate(0,0) rotate(0deg); opacity: 1; }
+        .stage:hover .p2 { clip-path: polygon(100% 50%, 50% 100%, 50% 50%); transform: translate(0,0) rotate(0deg); opacity: 1; }
+        .stage:hover .p3 { clip-path: polygon(50% 100%, 0% 50%, 50% 50%); transform: translate(0,0) rotate(0deg); opacity: 1; }
+        .stage:hover .p4 { clip-path: polygon(0% 50%, 50% 0%, 50% 50%); transform: translate(0,0) rotate(0deg); opacity: 0.8; }
+
+        .scroll-hint {
+            margin-top: 50px;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            color: var(--primary);
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+            text-decoration: none;
+        }
+
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
+
+        /* --- SECCIONES DE CONTENIDO --- */
+        .hero-text { text-align: center; padding: 120px 10% 80px; }
+        .hero-text h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 8vw, 6rem); line-height: 1.1; margin: 0; }
+        .hero-text h1 span { color: transparent; -webkit-text-stroke: 1px var(--primary); font-style: italic; }
+
+        .director-section { padding: 120px 10% 80px 10%; background: **var(--bg-body)**; text-align: center; }
+        .director-box { max-width: 900px; margin: auto; background: var(--glass); padding: 60px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.1); }
+        .director-title { letter-spacing: 8px; font-weight: 700; font-size: 2.2rem; margin-top: 20px; text-transform: uppercase; }
+        .director-subtitle { color: #6a89cc; letter-spacing: 2px; margin-bottom: 35px; font-weight: 300; }
+        .director-text { font-size: 1.15rem; color: #ddd; text-align: justify; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; }
+
+        .manifesto { padding: 100px 10%; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .manifesto h2 { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--primary); }
+        .manifesto-content { border-left: 2px solid var(--primary); padding-left: 40px; font-size: 1.1rem; }
+
+        .services { padding: 100px 5%; text-align: center; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 60px; }
+        .service-card { background: var(--glass); padding: 50px 30px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05); transition: 0.4s; }
+        .service-card:hover { border-color: var(--primary); transform: translateY(-10px); }
+        .service-card i { font-size: 3rem; margin-bottom: 25px; color: var(--primary); }
+
+        .portfolio { padding: 100px 5%; text-align: center; }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; margin-top: 50px; }
+        .project-card { border-radius: 20px; overflow: hidden; background: #111; border: 1px solid rgba(255,255,255,0.05); text-align: left; transition: 0.4s; }
+        .project-card:hover { border-color: var(--primary); }
+        .project-img { height: 250px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: rgba(255,255,255,0.05); }
+
+        .challenges { padding: 100px 10%; text-align: center; background: **var(--bg-body)**; }
+        .challenge-steps { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin-top: 50px; }
+        .step { background: var(--bg-body); padding: 35px; border-radius: 20px; width: 200px; border-top: 4px solid var(--primary); }
+
+        .essence { padding: 120px 10%; background: var(--dark); }
+        .essence-box { max-width: 900px; margin: auto; padding: 50px; border-left: 3px solid var(--accent-gold); background: rgba(224, 192, 151, 0.02); }
+
+        .btn-glow { padding: 20px 45px; background: var(--primary); color: black; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block; margin-top: 40px; }
+
+        footer { padding: 80px 10%; text-align: center; border-top: 1px solid #111; color: #555; font-size: 0.8rem; letter-spacing: 2px; }
+
+        @media (max-width: 768px) { .manifesto { grid-template-columns: 1fr; } }
+    </style>
+</head>
+    <body data-theme="dark">
+    <div class="floating-nav">
+    <button onclick="toggleMood()" class="nav-btn mood-btn">
+        <i class="fas fa-adjust"></i>
+    </button>
+    <div class="nav-divider"></div>
+    <button onclick="toggleLang()" id="btnLang" class="nav-btn lang-btn">
+        EN
+    </button>
+</div>
+
+    <header>
+        <div class="logo">MAXIKUEY</div>
+        <nav style="font-size: 0.7rem; font-weight: 600;">
+            <a href="#director" style="color:white; text-decoration:none; margin-left:20px;">DIRECTOR</a>
+            <a href="#servicios" style="color:white; text-decoration:none; margin-left:20px;">BASES</a>
+            <a href="#retos" style="color:white; text-decoration:none; margin-left:20px;">RETOS</a>
+        </nav>
+    </header>
+
+    <section class="intro-hero">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <p style="letter-spacing: 5px; color: var(--accent-gold); font-size: 0.8rem; margin: 0;">MAXIKUEY AGENCY</p>
+            <h1 style="font-family: 'Playfair Display', serif; font-size: 3rem; margin: 10px 0 0 0; color: white;">Pulimos el éxito.</h1>
+        </div>
+
+        <div class="stage">
+            <div class="piece p1"></div>
+            <div class="piece p2"></div>
+            <div class="piece p3"></div>
+            <div class="piece p4"></div>
+        </div>
+
+        <a href="#hero-content" class="scroll-hint">Desliza para ver la transformación ↓</a>
+    </section>
+
+    <div id="hero-content" class="hero-text" style="text-align: center; padding: 150px 10% 80px; position: relative; overflow: hidden;">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 400px; height: 400px; background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%); z-index: 0; filter: blur(40px); pointer-events: none;"></div>
+    
+    <div style="position: relative; z-index: 1;">
+        <p style="letter-spacing: 6px; color: var(--accent-gold); margin-bottom: 20px; font-weight: 700; text-transform: uppercase; font-size: 0.8rem;">EMIRO ATENCIO | DIRECTOR CREATIVO</p>
+        <h1 style="font-family: 'Playfair Display', serif; font-size: clamp(3rem, 7vw, 5rem); line-height: 1.1; margin: 0;">Convertimos <span class="glow-text">Piedras</span> <br>en <span class="glow-text">Diamantes</span></h1>
+        <p style="max-width: 800px; margin: 30px auto; font-size: 1.3rem; color: #aaa; font-weight: 300; font-style: italic;">"El mundo ahora es de redes, comunidades y audiencias. Si no conformas esos pilares, te perderás en las sombras."</p>
+    </div>
+</div>
+
+<section id="director" class="director-section" style="padding: 60px 5%;">
+    <div class="director-box-pro">
+        <div class="scanner-bar"></div>
+        
+        <div style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center;">
+            <div style="position: relative; margin-bottom: 30px;">
+                <img src="https://lh3.googleusercontent.com/a/ACg8ocK4pieljcnBW_n3kwbs8WoCX68ZkH15D_WC8qjrDkSIQrHcHTGD=s576-c-no" alt="Director Creativo" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--primary); padding: 5px; object-fit: cover; background: var(--bg-body);">
+                <div class="status-dot"></div>
+            </div>
+            
+            <div class="director-title" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: white; letter-spacing: 3px; text-transform: uppercase;">Director Creativo</div>
+            <div class="director-subtitle" style="color: var(--accent-gold); letter-spacing: 4px; font-size: 0.8rem; margin-top: 5px; text-transform: uppercase; font-weight: 700;">Para imagen de empresa y marca</div>
+            
+            <div style="width: 40px; height: 2px; background: var(--bg-body); margin: 30px auto;"></div>
+            
+            <p class="director-text" style="max-width: 850px; text-align: justify; color: #bbb; line-height: 1.9; font-size: 1.1rem; font-weight: 300;">
+                Contiene una mezcla de liderazgo, estrategia, visión artística y conceptual de una marca. Con habilidades de comunicación, conocimientos en marketing, diseño, tendencias digitales, gestión de proyectos y de equipos. Transforma conceptos en estrategias visuales coherentes que conectan con la audiencia, supervisa la ejecución creativa para asegurar la calidad y estrategia, cumpliendo los objetivos de negocio y manejando desde el branding hasta campañas multiplataforma.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="manifesto-2026" style="padding: 120px 10%; background: var(--bg-body); position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+    
+    <div class="nebula-bg"></div>
+
+    <div style="max-width: 1000px; position: relative; z-index: 2; text-align: center;">
+        
+        <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.1; margin-bottom: 40px; color: #fff; letter-spacing: -1px;">
+            Necesitas <span class="text-glow-stream">hacerte notar</span>,<br>
+            <span style="font-size: 0.8em; font-weight: 300; opacity: 0.7;">necesitas participar.</span>
+        </h2>
+
+        <div class="glass-manifesto-box">
+            <p style="font-size: 1.25rem; color: #bbb; line-height: 1.8; margin-bottom: 30px; font-weight: 300;">
+                Los días pasan, no nos notamos o no crecemos porque no participamos, no nos integramos, no nos actualizamos, no nos innovamos. Lo importante es tomar la decisión y sumarse en el camino de avanzar a nuevos rumbos donde están llenos de gente que le gusta participar.
+            </p>
+            
+            <div class="separator-glow"></div>
+
+            <p style="font-size: 1.4rem; color: #fff; font-weight: 400; font-style: italic; line-height: 1.6; position: relative;">
+                "Únete a la nueva escalada que estoy dando y te demostraré cómo crear un <span style="color: var(--primary);">mar de emociones</span> donde millones de personas puedan identificarse con tu marca y formar un imperio de éxitos."
+            </p>
+        </div>
+
+    </div>
+
+    <style>
+        /* Innovación: Fondo de Nebulosa Animada */
+        .nebula-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 212, 255, 0.12) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Caja de Vidrio con Borde de Neón Desvanecido */
+        .glass-manifesto-box {
+            padding: 60px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(25px);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+        }
+
+        .glass-manifesto-box:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 212, 255, 0.3);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 50px 120px rgba(0, 212, 255, 0.1);
+        }
+
+        /* El Separador que "Vibra" con Luz */
+        .separator-glow {
+            width: 100px;
+            height: 2px;
+            background: var(--primary);
+            margin: 40px auto;
+            border-radius: 10px;
+            box-shadow: 0 0 20px var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .separator-glow::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, #fff, transparent);
+            animation: flowLight 3s infinite;
+        }
+
+        /* Efecto de Flujo de Texto */
+        .text-glow-stream {
+            color: var(--primary);
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            position: relative;
+            display: inline-block;
+        }
+
+        @keyframes flowLight {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Script simple para que el aura siga al mouse (Efecto 2026) */
+    </style>
+    <script>
+        document.querySelector('.manifesto-2026').addEventListener('mousemove', e => {
+            const rect = e.target.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+            e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+        });
+    </script>
+</section>
+
+<style>
+    .glow-text { color: var(--primary); text-shadow: 0 0 20px rgba(0,212,255,0.5); }
+    
+    .director-box-pro {
+        max-width: 950px; margin: 0 auto;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 70px 50px; border-radius: 40px;
+        position: relative; overflow: hidden;
+        backdrop-filter: blur(20px);
+        transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+    }
+
+    .director-box-pro:hover {
+        transform: translateY(-10px);
+        border-color: var(--primary);
+        box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+    }
+
+    .scanner-bar {
+        position: absolute; width: 100%; height: 2px;
+        background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        top: -10px; left: 0; opacity: 0; z-index: 1;
+    }
+
+    .director-box-pro:hover .scanner-bar {
+        animation: scannerDirector 3s infinite linear;
+        opacity: 0.6;
+    }
+
+    @keyframes scannerDirector {
+        0% { top: 0%; } 100% { top: 100%; }
+    }
+
+    .status-dot {
+        position: absolute; bottom: 15px; right: 15px;
+        width: 15px; height: 15px; background: var(--primary);
+        border-radius: 50%; box-shadow: 0 0 15px var(--primary);
+        animation: pulseStatus 2s infinite; z-index: 4;
+    }
+
+    @keyframes pulseStatus {
+        0% { transform: scale(1); opacity: 1; }
+        100% { transform: scale(2.5); opacity: 0; }
+    }
+</style>
+    <section id="servicios" class="services">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 3.5rem;">Funciones <span>Principales</span></h2>
+        <div class="services-grid">
+            <div class="service-card"><i class="fas fa-chess-knight"></i><h3>Branding y Estrategia</h3><p>El ADN de tu marca. Definimos el propósito y el sentimiento para ser parte del día a día.</p></div>
+            <div class="service-card"><i class="fas fa-eye"></i><h3>Diseño y Visual</h3><p>Comunicación coherente. Transformamos conceptos en realidades visuales que conectan.</p></div>
+            <div class="service-card"><i class="fas fa-rocket"></i><h3>Marketing y Digital</h3><p>La escalada al éxito. Te integramos en las nuevas tendencias y tecnologías.</p></div>
+        </div>
+    </section>
+
+   <section id="proyectos" style="padding: 120px 5%; background: var(--bg-body); position: relative;">
+        <div style="text-align: center; margin-bottom: 80px;">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 3.5rem; color: white;">Muestra de <span style="color: var(--primary);">Proyectos</span></h2>
+            <p style="color: var(--accent-gold); letter-spacing: 5px; font-size: 0.75rem; text-transform: uppercase; font-weight: 700;">Visión Creativa | Ejecución de Éxito</p>
+        </div>
+
+        <div class="showcase-grid">
+            <div class="showcase-item">
+                <div class="scan-line"></div>
+                <div class="showcase-img" style="background-image: url('https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="showcase-overlay">
+                    <div class="overlay-info">
+                        <span class="tag-gold">ESTRATEGIA VISUAL</span>
+                        <h3>Calidad Supervisada</h3>
+                        <p>Coherencia absoluta en cada detalle de marca bajo estándares de dirección creativa profesional.</p>
+                        <div class="tech-stack-mini">BRANDING / ESTRATEGIA / <span style="color: var(--accent-gold);">MAXIKUEY</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="showcase-item">
+                <div class="scan-line"></div>
+                <div class="showcase-img" style="background-image: url('https://images.unsplash.com/photo-1558403194-611308249627?auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="showcase-overlay">
+                    <div class="overlay-info">
+                        <span class="tag-gold">CAMPAÑA GLOBAL</span>
+                        <h3>Conexión Profunda</h3>
+                        <p>Impacto emocional diseñado para audiencias tecnológicas que buscan autenticidad y propósito.</p>
+                        <div class="tech-stack-mini">ADS / AUDIENCIAS / <span style="color: var(--accent-gold);">IA READY</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .tag-gold {
+                font-size: 0.65rem;
+                letter-spacing: 2px;
+                color: #000;
+                background: var(--accent-gold);
+                padding: 4px 12px;
+                border-radius: 4px;
+                font-weight: 800;
+                text-transform: uppercase;
+            }
+            .tech-stack-mini {
+                margin-top: 20px;
+                font-family: 'Montserrat', sans-serif;
+                font-size: 0.7rem;
+                font-weight: 600;
+                color: rgba(255,255,255,0.6);
+                border-top: 1px solid rgba(255,255,255,0.1);
+                padding-top: 15px;
+                letter-spacing: 1px;
+            }
+        </style>
+    </section>
+    <section id="planes" style="padding: 100px 5%; background: var(--bg-body); position: relative; overflow: visible;">
+    
+    <div style="text-align: center; margin-bottom: 70px;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 3.5rem; color: white; margin: 0;">
+            Niveles de <span style="color: #e0c097;">Inversión</span>
+        </h2>
+        <div style="width: 80px; height: 1px; background: #e0c097; margin: 20px auto;"></div>
+        <p style="color: rgba(255,255,255,0.4); letter-spacing: 4px; font-size: 0.7rem;">SIMBIOSIS ENTRE ESTRATEGIA Y DISEÑO</p>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; max-width: 1200px; margin: 0 auto;">
+        
+        <div class="card-wrapper">
+            <div class="glass-card card-black">
+                <div class="glass-content">
+                    <span class="level-tag">NIVEL I</span>
+                    <h3 class="title-text">El Carbón</h3>
+                    <p class="plan-status">ESENCIAL</p>
+                    <ul class="glass-list">
+                        <li>✓ Identidad Visual Base</li>
+                        <li>✓ Paleta de Colores</li>
+                        <li>✓ Manual de Uso Digital</li>
+                    </ul>
+                    <a href="#contacto" class="glass-btn">INICIAR TALLA</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-wrapper featured-wrapper">
+            <div class="recom-badge">RECOMENDADO</div>
+            <div class="glass-card card-gold">
+                <div class="glass-content">
+                    <span class="level-tag">NIVEL II</span>
+                    <h3 class="title-text">La Talla</h3>
+                    <p class="plan-status">PROFESIONAL</p>
+                    <ul class="glass-list">
+                        <li>✓ Branding Completo Premium</li>
+                        <li>✓ Estrategia de Comunicación</li>
+                        <li>✓ Pack Redes (12 piezas)</li>
+                    </ul>
+                    <a href="#contacto" class="glass-btn gold-special-btn">PULIR MI MARCA</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-wrapper">
+            <div class="glass-card card-white">
+                <div class="glass-content">
+                    <span class="level-tag">NIVEL III</span>
+                    <h3 class="title-text">El Diamante</h3>
+                    <p class="plan-status">EXCLUSIVO</p>
+                    <ul class="glass-list">
+                        <li>✓ Dirección Creativa Total</li>
+                        <li>✓ Gestión de Marca Anual</li>
+                        <li>✓ Consultoría Estratégica</li>
+                    </ul>
+                    <a href="#contacto" class="glass-btn white-special-btn">MÁXIMO NIVEL</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* CONTENEDOR EXTERIOR (Maneja elevación y Recomendado) */
+        .card-wrapper {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .featured-wrapper { transform: scale(1.05); z-index: 2; }
+
+        .card-wrapper:hover {
+            transform: translateY(-20px);
+        }
+        .featured-wrapper:hover {
+            transform: translateY(-25px) scale(1.08);
+        }
+
+        /* TARJETA GLASS (Maneja el fondo y el destello interno) */
+        .glass-card {
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            position: relative;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden; /* AHORA SÍ O SÍ EL DESTELLO SE QUEDA ADENTRO */
+            transition: background 0.5s ease;
+        }
+
+        /* EL DESTELLO INTERNO */
+        .glass-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 70%;
+            height: 100%;
+            background: linear-gradient(
+                to right, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent
+            );
+            transform: skewX(-25deg);
+            transition: 0.8s ease-in-out;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .card-wrapper:hover .glass-card::before {
+            left: 150%;
+        }
+
+        /* COLORES BASE */
+        .card-black { background: rgba(0, 0, 0, 0.7); color: #fff; }
+        .card-gold { background: rgba(224, 192, 151, 0.85); color: #000; }
+        .card-white { background: rgba(255, 255, 255, 0.85); color: #000; }
+
+        /* HOVER: CAMBIO A NEGRO ECLIPSE */
+        .card-wrapper:hover .glass-card { background: rgba(0, 0, 0, 0.95); color: #fff; }
+        .card-wrapper:hover .level-tag { color: #e0c097 !important; }
+        .card-wrapper:hover .title-text { color: #fff !important; }
+        .card-wrapper:hover .plan-status { color: #e0c097 !important; }
+        .card-wrapper:hover .glass-list { color: rgba(255,255,255,0.7) !important; }
+
+        /* CONTENIDO */
+        .glass-content { padding: 50px 35px; text-align: center; position: relative; z-index: 2; }
+        .level-tag { font-size: 0.6rem; letter-spacing: 4px; display: block; margin-bottom: 10px; color: rgba(100,100,100,0.8); transition: 0.5s; }
+        .title-text { font-family: 'Playfair Display', serif; font-size: 2.3rem; margin: 10px 0; transition: 0.5s; }
+        .plan-status { font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 35px; color: rgba(120,120,120,0.8); transition: 0.5s; }
+        .card-black .plan-status { color: #e0c097; }
+        .glass-list { list-style: none; padding: 0; margin: 0 0 40px 0; text-align: left; font-size: 0.95rem; line-height: 2.2; transition: 0.5s; }
+
+        /* BOTONES */
+        .glass-btn { display: block; padding: 16px; border-radius: 50px; text-decoration: none; font-size: 0.75rem; font-weight: bold; letter-spacing: 2px; transition: 0.3s; border: 1px solid rgba(255,255,255,0.2); color: #fff; }
+        .gold-special-btn, .white-special-btn { background: #000; color: #fff; border: none; }
+        .card-wrapper:hover .glass-btn { background: #e0c097; color: #000; border: none; }
+
+        /* RECOMENDADO */
+        .recom-badge {
+            position: absolute; 
+            top: -15px; 
+            left: 50%; 
+            transform: translateX(-50%);
+            background: #e0c097; 
+            color: #000; 
+            padding: 8px 30px; 
+            font-size: 0.7rem; 
+            font-weight: 900; 
+            border-radius: 50px; 
+            z-index: 100;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(224,192,151,0.5);
+        }
+    </style>
+</section>
+
+
+    <section id="retos" class="challenges">
+    <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem;">El Desbloqueo de <span>Retos</span></h2>
+    <div class="challenge-steps">
+        <div class="step" 
+             style="transition: all 0.4s ease; position: relative; cursor: pointer;" 
+             onmouseover="this.style.boxShadow='0 0 30px rgba(0, 212, 255, 0.4)'; this.style.borderColor='var(--primary)';" 
+             onmouseout="this.style.boxShadow='none'; this.style.borderColor='';">
+            <h3>01</h3>
+            <p>Mentalidad y nuevas realidades.</p>
+        </div>
+
+        <div class="step" 
+             style="transition: all 0.4s ease; position: relative; cursor: pointer;" 
+             onmouseover="this.style.boxShadow='0 0 30px rgba(0, 212, 255, 0.4)'; this.style.borderColor='var(--primary)';" 
+             onmouseout="this.style.boxShadow='none'; this.style.borderColor='';">
+            <h3>02</h3>
+            <p>Fusión Humano + IA.</p>
+        </div>
+
+        <div class="step" 
+             style="transition: all 0.4s ease; position: relative; cursor: pointer;" 
+             onmouseover="this.style.boxShadow='0 0 30px rgba(0, 212, 255, 0.4)'; this.style.borderColor='var(--primary)';" 
+             onmouseout="this.style.boxShadow='none'; this.style.borderColor='';">
+            <h3>03</h3>
+            <p>Acción y Participación.</p>
+        </div>
+
+        <div class="step" 
+             style="transition: all 0.4s ease; position: relative; cursor: pointer;" 
+             onmouseover="this.style.boxShadow='0 0 30px rgba(0, 212, 255, 0.4)'; this.style.borderColor='var(--primary)';" 
+             onmouseout="this.style.boxShadow='none'; this.style.borderColor='';">
+            <h3>04</h3>
+            <p>Imperio de Éxitos.</p>
+        </div>
+    </div>
+</section>
+
+   <section class="essence" style="padding: 120px 10%; background: var(--bg-body); position: relative; overflow: hidden;">
+    
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 300px; background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.08) 0%, transparent 70%); z-index: 0; pointer-events: none;"></div>
+
+    <div class="essence-box" 
+         style="max-width: 900px; margin: 0 auto; padding: 80px 50px; border-radius: 40px; background: rgba(5, 5, 5, 0.6); border: 1px solid rgba(0, 212, 255, 0.2); position: relative; z-index: 2; backdrop-filter: blur(20px); transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); cursor: default;"
+         onmouseover="this.style.transform='scale(1.02)'; this.style.borderColor='var(--primary)'; this.style.boxShadow='0 0 50px rgba(0, 212, 255, 0.15)';"
+         onmouseout="this.style.transform='scale(1)'; this.style.borderColor='rgba(0, 212, 255, 0.2)'; this.style.boxShadow='none';">
+        
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; border-radius: 40px; pointer-events: none;">
+            <div class="pulse-line"></div>
+        </div>
+
+        <h3 style="color: #fff; font-size: 2.8rem; font-family: 'Playfair Display', serif; margin-bottom: 30px; letter-spacing: 2px;">
+            La Alianza <span style="color: var(--primary); text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);">Infinita</span>
+        </h3>
+        
+        <p style="font-size: 1.5rem; line-height: 1.6; color: #fff; font-weight: 300; font-style: italic; position: relative;">
+            <span style="color: var(--primary); font-size: 3rem; position: absolute; left: -40px; top: -20px; opacity: 0.5; font-family: serif;">"</span>
+            La creatividad única de un ser humano y sus sentimientos, sumado a la información mundial que puede acceder una IA... es infinito el éxito que pudieras lograr.
+            <span style="color: var(--primary); font-size: 3rem; position: absolute; right: -20px; bottom: -40px; opacity: 0.5; font-family: serif;">"</span>
+        </p>
+
+        <div style="display: flex; justify-content: center; gap: 15px; margin-top: 40px;">
+            <div class="node"></div>
+            <div class="node" style="animation-delay: 0.5s;"></div>
+            <div class="node" style="animation-delay: 1s;"></div>
+        </div>
+    </div>
+
+    <style>
+        /* Animación de la Línea de Pulso que recorre el borde */
+        .pulse-line {
+            position: absolute;
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            top: 0;
+            left: -150px;
+            animation: movePulse 4s infinite linear;
+        }
+
+        @keyframes movePulse {
+            0% { left: -150px; top: 0; }
+            25% { left: 100%; top: 0; }
+            26% { left: 100%; top: 0; transform: rotate(90deg); }
+            50% { left: 100%; top: 100%; }
+            /* Un recorrido infinito por el borde de la caja */
+            100% { left: -150px; top: 0; }
+        }
+
+        .node {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--primary);
+            animation: pulseNode 2s infinite;
+        }
+
+        @keyframes pulseNode {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.5); opacity: 1; }
+        }
+    </style>
+</section>
+
+    <section id="valores-humanos" style="padding: 120px 10%; text-align: center; background: var(--bg-body); position: relative; overflow: hidden;">
+    
+    <div class="nebulosa-flotante"></div>
+
+    <div style="position: relative; z-index: 2;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 3.2rem; letter-spacing: -1px; margin-bottom: 20px; color: #fff;">
+            Afecto, Solidaridad y <span style="color: var(--primary); font-style: italic;">Respeto</span>
+        </h2>
+        
+        <div style="width: 80px; height: 1px; background: var(--primary); margin: 0 auto 40px; opacity: 0.5;"></div>
+
+        <p style="max-width: 750px; margin: 0 auto 50px; color: #eee; font-size: 1.4rem; font-weight: 300; line-height: 1.8; letter-spacing: 0.5px;">
+            "Mi motivo de vida es dar lo mejor de mí a los que me rodean. El éxito de los demás debería ser el éxito para la humanidad."
+        </p>
+
+        <a href="#contacto-final" class="btn-human-tech">
+            <span>Caminemos Juntos</span>
+            <div class="btn-wave"></div>
+        </a>
+    </div>
+
+    <style>
+        /* La Nebulosa: Un efecto de luz orgánica que sigue una trayectoria suave */
+        .nebulosa-flotante {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.07) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            filter: blur(80px);
+            animation: moveNebula 15s infinite alternate ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes moveNebula {
+            0% { transform: translate(-60%, -40%) scale(1); }
+            100% { transform: translate(-40%, -60%) scale(1.2); }
+        }
+
+        /* Botón con Innovación Minimalista */
+        .btn-human-tech {
+            position: relative;
+            display: inline-block;
+            padding: 22px 50px;
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            overflow: hidden;
+        }
+
+        .btn-human-tech span {
+            position: relative;
+            z-index: 3;
+        }
+
+        .btn-human-tech:hover {
+            color: #000;
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+        }
+
+        /* El efecto de onda al pasar el mouse (Liquid Fill) */
+        .btn-human-tech::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: 1;
+        }
+
+        .btn-human-tech:hover::before {
+            top: 0;
+        }
+
+        /* Pulso de energía constante en el botón */
+        .btn-wave {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--primary);
+            border-radius: 100px;
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0;
+            z-index: 0;
+        }
+
+        .btn-human-tech:hover .btn-wave {
+            animation: pulseBtn 1.5s infinite;
+        }
+
+        @keyframes pulseBtn {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(1.4); opacity: 0; }
+        }
+    </style>
+</section>
+<section id="metodologia-pro" style="padding: 120px 10%; background: var(--bg-body); position: relative; overflow: hidden;">
+    
+    <div style="position: absolute; top: 0; right: 0; width: 300px; height: 300px; background: var(--secondary); filter: blur(150px); opacity: 0.1; z-index: 0;"></div>
+
+    <div style="text-align: center; margin-bottom: 80px; position: relative; z-index: 1;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); margin: 0; letter-spacing: -1px;">
+            El Proceso de <span style="color: var(--primary); text-shadow: 0 0 20px rgba(0,212,255,0.3);">Pulido</span>
+        </h2>
+        <div style="width: 60px; height: 4px; background: var(--primary); margin: 20px auto; border-radius: 10px;"></div>
+        <p style="color: var(--accent-gold); letter-spacing: 5px; font-size: 0.75rem; text-transform: uppercase; font-weight: 600;">Metodología de Alto Impacto</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 50px; position: relative; z-index: 1;">
+        
+        <div class="neo-card">
+            <div class="card-number">01</div>
+            <div class="icon-box"><i class="fas fa-microchip"></i></div>
+            <h3>Fase: Extracción</h3>
+            <p>Diagnóstico asistido por IA para identificar el ADN oculto de tu marca.</p>
+            <div class="feature-list">
+                <span><i class="fas fa-bolt"></i> Auditoría Digital</span>
+                <span><i class="fas fa-bolt"></i> Mapa de Oportunidades</span>
+            </div>
+        </div>
+
+        <div class="neo-card active">
+            <div class="card-number">02</div>
+            <div class="icon-box"><i class="fas fa-layer-group"></i></div>
+            <h3>Fase: El Corte</h3>
+            <p>Diseño geométrico y estratégico. Convertimos la idea en una identidad afilada.</p>
+            <div class="feature-list">
+                <span><i class="fas fa-bolt"></i> Branding 3.0</span>
+                <span><i class="fas fa-bolt"></i> Ecosistema Visual</span>
+            </div>
+            <div class="glow-line"></div>
+        </div>
+
+        <div class="neo-card">
+            <div class="card-number">03</div>
+            <div class="icon-box"><i class="fas fa-atom"></i></div>
+            <h3>Fase: Brillo Total</h3>
+            <p>Lanzamiento con algoritmos de escalada. Tu marca en el centro del radar.</p>
+            <div class="feature-list">
+                <span><i class="fas fa-bolt"></i> Ads Inteligentes</span>
+                <span><i class="fas fa-bolt"></i> Crecimiento Exponencial</span>
+            </div>
+        </div>
+
+    </div>
+
+    <style>
+        .neo-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 50px 40px;
+            border-radius: 40px;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        .neo-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary);
+            box-shadow: 0 25px 50px -12px rgba(0, 212, 255, 0.2);
+        }
+
+        .active {
+            border-color: var(--secondary);
+            background: rgba(112, 0, 255, 0.03);
+            box-shadow: 0 0 30px rgba(112, 0, 255, 0.1);
+        }
+
+        .card-number {
+            font-size: 6rem;
+            font-weight: 900;
+            position: absolute;
+            top: -20px;
+            right: -10px;
+            opacity: 0.03;
+            transition: 0.5s;
+        }
+
+        .neo-card:hover .card-number { opacity: 0.1; right: 10px; color: var(--primary); }
+
+        .icon-box {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .neo-card h3 { font-size: 1.6rem; margin-bottom: 15px; letter-spacing: -0.5px; }
+        .neo-card p { color: #888; font-size: 0.95rem; line-height: 1.6; }
+
+        .feature-list { margin-top: 30px; display: flex; flex-direction: column; gap: 12px; }
+        .feature-list span { font-size: 0.8rem; color: #bbb; display: flex; align-items: center; }
+        .feature-list i { color: var(--primary); margin-right: 12px; font-size: 0.7rem; }
+
+        .glow-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            animation: moveGlow 3s linear infinite;
+        }
+
+        @keyframes moveGlow {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+    </style>
+</section>
+<section id="arsenal-tecnologico" style="padding: 120px 10%; background: var(--bg-body); position: relative;">
+    <div style="text-align: center; margin-bottom: 80px;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 3.5rem; color: white;">Nuestras <span style="color: var(--primary);">6 Bases</span> de Poder</h2>
+        <p style="color: #666; letter-spacing: 4px; font-size: 0.8rem; text-transform: uppercase;">Estructura Profesional | Resultados Tangibles</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+        
+        <div class="base-box">
+            <div class="base-header">
+                <i class="fas fa-brain"></i>
+                <span>CEREBRO</span>
+            </div>
+            <h3>Branding & Estrategia</h3>
+            <p>Construimos el ADN de tu marca. No es solo un logo, es el propósito que conecta con el sentimiento de tu audiencia.</p>
+            <div class="ai-tag">IA Enhanced: Análisis de Arquetipos</div>
+        </div>
+
+        <div class="base-box">
+            <div class="base-header">
+                <i class="fas fa-eye"></i>
+                <span>ROSTRO</span>
+            </div>
+            <h3>Diseño & Visual</h3>
+            <p>Transformamos conceptos en realidades visuales de alto impacto. Comunicación coherente y estética de vanguardia.</p>
+            <div class="ai-tag">IA Enhanced: Generación de Activos Sintéticos</div>
+        </div>
+
+        <div class="base-box">
+            <div class="base-header">
+                <i class="fas fa-network-wired"></i>
+                <span>MOTOR</span>
+            </div>
+            <h3>Marketing & Digital</h3>
+            <p>La escalada al éxito. Integramos tu marca en el ecosistema digital mediante algoritmos de crecimiento real.</p>
+            <div class="ai-tag">IA Enhanced: Segmentación Psicográfica</div>
+        </div>
+
+    </div>
+
+    <style>
+        .base-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .base-box:hover {
+            border-color: var(--primary);
+            background: rgba(0, 212, 255, 0.03);
+            transform: translateY(-5px);
+        }
+
+        .base-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: var(--accent-gold);
+            font-weight: 700;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+        }
+
+        .base-header i { font-size: 1.2rem; color: var(--primary); }
+
+        .base-box h3 { font-size: 1.5rem; margin-bottom: 15px; color: white; }
+        .base-box p { color: #888; font-size: 0.9rem; line-height: 1.6; }
+
+        .ai-tag {
+            margin-top: 25px;
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(112, 0, 255, 0.15);
+            color: #b080ff;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: 1px solid rgba(112, 0, 255, 0.3);
+        }
+
+        /* Animación de fondo sutil */
+        .base-box::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.05) 0%, transparent 70%);
+            opacity: 0;
+            transition: 0.5s;
+        }
+        .base-box:hover::after { opacity: 1; }
+    </style>
+</section>
+<section id="ingenieria-exito" style="padding: 100px 5%; background: var(--bg-body); color: white;">
+    <div style="text-align: center; margin-bottom: 70px;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--primary);">Ingeniería del Éxito</h2>
+        <p style="color: var(--accent-gold); letter-spacing: 5px; font-size: 0.8rem; text-transform: uppercase;">Sinergia entre Administración y Creatividad</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px;">
+        
+        <div class="tech-card">
+            <div class="tech-tag">CEREBRO</div>
+            <h3>Administración & Estrategia</h3>
+            <p>Fusionamos la visión comercial  con la intuición creativa. No solo creamos marcas, diseñamos imperios sostenibles.</p>
+            <ul class="tech-list">
+                <li><i class="fas fa-microchip"></i> Auditoría de Marca IA</li>
+                <li><i class="fas fa-microchip"></i> Planificación Financiera</li>
+            </ul>
+        </div>
+
+        <div class="tech-card featured">
+            <div class="tech-tag" style="background: var(--primary); color: black;">ROSTRO</div>
+            <h3>Artes Visuales & Diseño</h3>
+            <p>Dominio experto en suite de diseño  y fotografía profesional[cite: 67]. Visuales que cortan el ruido del mercado.</p>
+            <ul class="tech-list">
+                <li><i class="fas fa-bolt"></i> Diseño Neuronal</li>
+                <li><i class="fas fa-bolt"></i> Fotografía de Impacto</li>
+            </ul>
+        </div>
+
+        <div class="tech-card">
+            <div class="tech-tag">MOTOR</div>
+            <h3>Ecosistemas Digitales</h3>
+            <p>Ventas efectivas y presencia online[cite: 60, 65]. Aplicamos algoritmos para que tu marca lidere su sector.</p>
+            <ul class="tech-list">
+                <li><i class="fas fa-satellite"></i> Ads con IA</li>
+                <li><i class="fas fa-satellite"></i> Arquitectura Web 3.0</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <style>
+        .tech-card {
+            background: rgba(255,255,255,0.02);
+            padding: 50px 35px;
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        .tech-card:hover { transform: scale(1.03); border-color: var(--primary); background: rgba(0,212,255,0.03); }
+        .featured { border: 1px solid var(--primary); box-shadow: 0 0 30px rgba(0,212,255,0.1); }
+        
+        .tech-tag {
+            font-size: 0.6rem;
+            letter-spacing: 3px;
+            font-weight: 700;
+            border: 1px solid var(--primary);
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            color: var(--primary);
+        }
+        
+        .tech-card h3 { font-size: 1.6rem; margin-bottom: 20px; }
+        .tech-card p { color: #888; font-size: 0.95rem; line-height: 1.7; margin-bottom: 30px; }
+        
+        .tech-list { list-style: none; padding: 0; }
+        .tech-list li { font-size: 0.8rem; color: #ddd; margin-bottom: 12px; display: flex; align-items: center; }
+        .tech-list i { margin-right: 15px; color: var(--primary); font-size: 0.7rem; }
+    </style>
+</section>
+<section id="trayectoria" style="padding: 120px 5%; background: var(--bg-body); position: relative; overflow: hidden;">
+    
+    <div style="text-align: center; margin-bottom: 100px;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; color: white;">Hitos de una <span style="color: var(--primary);">Evolución</span></h2>
+        <p style="color: var(--accent-gold); letter-spacing: 5px; font-size: 0.8rem; text-transform: uppercase;">Trayectoria Profesional Certificada</p>
+    </div>
+
+    <div class="timeline-container">
+        
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2002 - INIA</span>
+                <h3>El Origen Digital</h3>
+                <p>Inicios en el diseño de páginas web y procesamiento de datos. La semilla de la tecnología fue plantada aquí[cite: 41, 47].</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content active-glow">
+                <span class="timeline-date">2015 - UC</span>
+                <h3>Visión Gerencial</h3>
+                <p>Licenciatura en Administración Comercial por la Universidad de Carabobo. La base estratégica de todo imperio[cite: 18, 20].</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2011-2019 - ARTES</span>
+                <h3>Maestría Visual</h3>
+                <p>Consolidación como Fotógrafo Profesional y Diseñador para grandes formatos y publicidad[cite: 52, 67].</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content special-card">
+                <span class="timeline-date">PRESENTE</span>
+                <h3>Director Creativo</h3>
+                <p>Fusión total de Administración, Arte e Inteligencia Artificial. Liderando el norte de la innovación.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <style>
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        /* Línea vertical animada */
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--primary), var(--secondary), transparent);
+            top: 0; bottom: 0; left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            opacity: 0.8;
+            transition: 0.5s;
+        }
+
+        .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+        .timeline-item:nth-child(even) { left: 50%; text-align: left; }
+
+        .timeline-dot {
+            position: absolute;
+            width: 16px; height: 16px;
+            background: var(--primary);
+            border-radius: 50%;
+            top: 25px; z-index: 10;
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot { right: -8px; }
+        .timeline-item:nth-child(even) .timeline-dot { left: -8px; }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .timeline-item:hover .timeline-content {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: var(--primary);
+            opacity: 1;
+        }
+
+        .timeline-date {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        .active-glow { border: 1px solid var(--secondary); box-shadow: 0 0 20px rgba(112, 0, 255, 0.1); }
+        .special-card { border: 1px solid var(--primary); background: rgba(0, 212, 255, 0.05); }
+
+        @media screen and (max-width: 768px) {
+            .timeline-container::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; text-align: left !important; }
+            .timeline-item:nth-child(even) { left: 0%; }
+            .timeline-dot { left: 23px !important; }
+        }
+    </style>
+</section>
+<section id="showcase" style="padding: 120px 5%; background: var(--bg-body); position: relative;">
+    
+    <div style="text-align: center; margin-bottom: 80px;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; color: white;">Portafolio <span style="color: var(--primary);">Estratégico</span></h2>
+        <p style="color: var(--accent-gold); letter-spacing: 5px; font-size: 0.75rem; text-transform: uppercase;">Evidencia de un Imperio en Expansión</p>
+    </div>
+
+    <div class="showcase-grid">
+        
+        <div class="showcase-item">
+            <div class="scan-line"></div>
+            <div class="showcase-img" style="background-image: url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=800&q=80');"></div>
+            <div class="showcase-overlay">
+                <div class="overlay-info">
+                    <span class="tag">FOTOGRAFÍA PROFESIONAL</span>
+                    <h3>Captura de Esencia</h3>
+                    <p>Dominio técnico de luz y composición para marcas de alto impacto.</p>
+                    <div class="tech-stack">ISO / APERTURA / IA RETOUCH</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="showcase-item">
+            <div class="scan-line"></div>
+            <div class="showcase-img" style="background-image: url('https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=800&q=80');"></div>
+            <div class="showcase-overlay">
+                <div class="overlay-info">
+                    <span class="tag">DISEÑO DE GRAN FORMATO</span>
+                    <h3>Impacto Visual</h3>
+                    <p>Experticia en gigantografías y publicidad exterior masiva.</p>
+                    <div class="tech-stack">CMYK / SCALABLE VECTOR / CORELDRAW</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="showcase-item">
+            <div class="scan-line"></div>
+            <div class="showcase-img" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80');"></div>
+            <div class="showcase-overlay">
+                <div class="overlay-info">
+                    <span class="tag">GERENCIA & MARKETING</span>
+                    <h3>Arquitectura Digital</h3>
+                    <p>Sistemas de venta en MercadoLibre y optimización de redes sociales.</p>
+                    <div class="tech-stack">ROI / ANALYTICS / IA ADS</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <style>
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .showcase-item {
+            height: 450px;
+            position: relative;
+            border-radius: 30px;
+            overflow: hidden;
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.05);
+            cursor: pointer;
+        }
+
+        .showcase-img {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 1.2s cubic-bezier(0.2, 1, 0.3, 1);
+            filter: grayscale(100%) brightness(0.6);
+        }
+
+        .showcase-item:hover .showcase-img {
+            transform: scale(1.1);
+            filter: grayscale(0%) brightness(1);
+        }
+
+        /* Línea de escaneo láser */
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            box-shadow: 0 0 15px var(--primary);
+            top: -10px;
+            z-index: 5;
+            opacity: 0;
+        }
+
+        .showcase-item:hover .scan-line {
+            animation: scanMove 2s infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes scanMove {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+
+        .showcase-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent, rgba(0, 212, 255, 0.8));
+            opacity: 0;
+            display: flex;
+            align-items: flex-end;
+            padding: 40px;
+            transition: 0.5s ease;
+        }
+
+        .showcase-item:hover .showcase-overlay {
+            opacity: 1;
+        }
+
+        .overlay-info h3 { font-size: 1.8rem; margin: 10px 0; color: white; }
+        .overlay-info p { font-size: 0.9rem; color: rgba(255,255,255,0.9); line-height: 1.4; }
+        
+        .tag {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: black;
+            background: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: 800;
+        }
+
+        .tech-stack {
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.6);
+            border-top: 1px solid rgba(255,255,255,0.3);
+            padding-top: 15px;
+        }
+    </style>
+</section>
+<section id="contacto-final" style="padding: 100px 10%; background: radial-gradient(circle at center, var(--gradient-start) 0%, var(--gradient-end) 100%); text-align: center; position: relative; overflow: hidden;">
+    
+    <div style="position: absolute; width: 300px; height: 300px; background: var(--primary); filter: blur(150px); opacity: 0.1; top: -150px; left: 50%; transform: translateX(-50%);"></div>
+
+    <div style="position: relative; z-index: 10;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 20px;">¿Listo para <span style="color: var(--primary);">Pulir tu Éxito</span>?</h2>
+        <p style="color: #aaa; max-width: 600px; margin: 0 auto 60px; font-size: 1.1rem; line-height: 1.6;">
+            El futuro pertenece a quienes se atreven a innovar. Únete a la nueva era de Maxikuey y transformemos tu visión en un imperio.
+        </p>
+
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-bottom: 60px;">
+            
+            <a href="https://wa.me/584121366562" target="_blank" class="contact-link">
+                <i class="fab fa-whatsapp"></i>
+                <span>+58 412 136 6562</span>
+            </a>
+
+            <a href="https://instagram.com/maxikuey" target="_blank" class="contact-link">
+                <i class="fab fa-instagram"></i>
+                <span>@maxikuey</span>
+            </a>
+
+            <a href="mailto:maxikuey@gmail.com" class="contact-link">
+                <i class="far fa-envelope"></i>
+                <span>maxikuey@gmail.com</span>
+            </a>
+
+        </div>
+
+        <div style="margin-top: 40px;">
+            <p style="letter-spacing: 5px; color: var(--accent-gold); font-size: 0.7rem; text-transform: uppercase; font-weight: 700;">Director Creativo: Emiro Atencio</p>
+            <div style="width: 100px; height: 1px; background: var(--accent-gold); margin: 15px auto; opacity: 0.3;"></div>
+        </div>
+    </div>
+
+    <style>
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 35px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-link i {
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+
+        .contact-link:hover {
+            transform: translateY(-10px) scale(1.05);
+            background: rgba(0, 212, 255, 0.05);
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .contact-link:hover i {
+            animation: pulse-icon 1s infinite alternate;
+        }
+
+        @keyframes pulse-icon {
+            from { transform: scale(1); filter: drop-shadow(0 0 2px var(--primary)); }
+            to { transform: scale(1.2); filter: drop-shadow(0 0 10px var(--primary)); }
+        }
+    </style>
+    </head>
+    <footer style="background: transparent; color: var(--text-main); text-align: center; padding: 40px 0;">
+        MAXIKUEY AGENCY &copy; 2026 | DIRECTOR CREATIVO: EMIRO ATENCIO
+    </footer>
+<script>
+// Función para cambiar el COLOR (Mood)
+function toggleMood() {
+    const body = document.body;
+    // Si el tema actual es light, lo ponemos dark. Si no, lo ponemos light.
+    const currentTheme = body.getAttribute('data-theme');
+    const newTheme = (currentTheme === 'light') ? 'dark' : 'light';
+    body.setAttribute('data-theme', newTheme);
+}
+
+// Función para cambiar el IDIOMA (Language)
+function toggleLang() {
+    const btn = document.getElementById('btnLang');
+    const isEs = btn.innerText === 'EN';
+    
+    // Cambiamos el texto del botón
+    btn.innerText = isEs ? 'ES' : 'EN';
+    
+    // Buscamos todos los elementos que tengan la clase "lang" y les cambiamos el texto
+    document.querySelectorAll('.lang').forEach(el => {
+        const textEn = el.getAttribute('data-en');
+        const textEs = el.getAttribute('data-es');
+        el.innerText = isEs ? textEn : textEs;
+    });
+}
+</script>
+</body>
+</html>

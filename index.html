@@ -376,6 +376,44 @@ p,
     border-radius: 40px !important;
     margin: 0 auto !important;
 }
+/* --- SINTONÍA QUIRÚRGICA DE COLOR (PASO 1) --- */
+
+/* 1. Definimos el Blanco Diamante (Contraste Máximo) */
+:root {
+    --text-pure: #ffffff;
+    --text-dim: #b0b0b0; /* Gris elegante, no apagado */
+}
+
+/* 2. El Director habla claro: Mejora de legibilidad en la Bio */
+.director-text, .manifesto-content, .service-card p {
+    color: var(--text-dim) !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Sutil profundidad */
+}
+
+/* 3. Unificación de Títulos: Que el Cian sea el acento, no el ruido */
+.glow-text, span.text-glow-stream {
+    color: var(--primary) !important;
+    text-shadow: 0 0 15px rgba(0, 212, 255, 0.4) !important;
+}
+
+/* 4. ARREGLO CRÍTICO MODO CLARO (Legibilidad Total) */
+[data-theme="light"] {
+    --text-pure: #1d1d1f;
+    --text-dim: #424245;
+}
+
+[data-theme="light"] .director-text, 
+[data-theme="light"] .manifesto-2026 p, 
+[data-theme="light"] h1, 
+[data-theme="light"] h2,
+[data-theme="light"] .title-text {
+    color: #1d1d1f !important; /* Forzamos el color oscuro en modo claro */
+}
+
+[data-theme="light"] .glass-card {
+    background: rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
 </style>
 </head>
     <body data-theme="dark">

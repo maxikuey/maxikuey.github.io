@@ -466,6 +466,53 @@ p, .director-text, .manifesto-content, .service-card p, .glass-list li {
     /* Esto obliga a que todo lo que esté dentro de una caja herede el color correcto */
     transition: all 0.5s ease;
 }
+/* ============================================================
+   PERFECCIÓN LECTORA Y TECNOLOGÍA FLUIDA (MAESTRO MK)
+   ============================================================ */
+
+/* 1. Suavizado de Fuente Nivel Pro (Efecto Retina) */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* 2. El Secreto de la Tipografía Fluida */
+:root {
+    /* El tamaño base viaja entre 15px y 18px según el monitor */
+    --fluid-body: clamp(0.95rem, 0.8rem + 0.5vw, 1.1rem);
+    --fluid-h1: clamp(2.2rem, 1.5rem + 4vw, 4rem);
+}
+
+/* 3. Recalibración de Párrafos para el Ojo Humano */
+p, .director-text, .manifesto-content, .service-card p {
+    font-size: var(--fluid-body) !important;
+    line-height: 1.85 !important; /* Espaciado áureo para lectura sin fatiga */
+    letter-spacing: 0.015em !important;
+    color: var(--mk-text-read) !important;
+    text-wrap: pretty; /* Tecnología 2026: evita palabras sueltas al final */
+}
+
+/* 4. Títulos con Peso Dinámico */
+h1, .hero-text h1, .director-title {
+    font-size: var(--fluid-h1) !important;
+    font-variation-settings: "wght" 400; /* Para fuentes variables */
+    margin-bottom: 1.5rem !important;
+}
+
+/* 5. El "Efecto Foco" en Listas (Challenges & Essence) */
+.glass-list li, .challenge-card p {
+    margin-bottom: 12px !important;
+    position: relative;
+    padding-left: 5px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* 6. Corrección de Contraste para Modo Light (Safari Check) */
+[data-theme="light"] p {
+    font-weight: 450 !important; /* Un poco más de cuerpo en fondo claro */
+    color: #3c4043 !important; /* El tono exacto de Google High-Readability */
+}
 </style>
 </head>
     <body data-theme="dark">
